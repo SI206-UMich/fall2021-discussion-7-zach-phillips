@@ -24,15 +24,15 @@ def find_word(string_list):
 
     # initialize an empty list
     results = []
-    # define the regular expression
-
+    # define the regular 
+    regex = r'\b([a-zA-Z]+)\d{3}([A-Za-z]+)'
     # loop through each line of the string list 
     for line in string_list:
     # find all the words that match the regular expression in each line
-        line = line.rstrip()
-        x = re.findall('\w+[0,9]{3},\w+', line)
+        x = re.findall(regex, line)
     # loop through the found words and add the words to your empty list 
-
+        for item in x:
+            results.append(item)
     #return the list of all words that start with the letter B, E, or T
     return results
 
@@ -43,13 +43,14 @@ def find_days(string_list):
     # initialize an empty list
     results = []
     # define the regular expression
-    
+    regex = r'(\b\d{1,2})[\/](\d{1,2})[\/](\d{4})'
     # loop through each line of the string list
     for line in string_list:
     # find all the dates that match the regular expression in each line
-        print('hello')
+        x = re.findall(regex, line)
     # loop through the found dates and only add the days to your empty list 
-    
+        for item in x:
+            results.append(item[1])
     #return the list of days
     return results
 
@@ -57,22 +58,24 @@ def find_domains(string_list):
     """ Return a list of web address domains from the list of strings the domains of a wbsite are after www. """
 
     # initialize an empty list
-
+    results = []
     # define the regular expression
-
+    regex = r'https?://[\w.]+'
     # loop through each line of the string list
-
+    for line in string_list:
     # find all the domains that match the regular expression in each line
-
+        x = re.findall(regex, line)
     # loop through the found domains
-
+        for item in x:
+            domain = item.split('//')[1].strip('www.')
+            results.append(domain)
     # get the domain name by splitting the (//) after the https or http to get the website name
     # then strip the www. to get only the domain name
 
     # add the domains to your empty list
     
     #return the list of domains
-    pass
+    return results
 
 class TestAllMethods(unittest.TestCase):
 
